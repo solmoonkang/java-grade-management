@@ -127,18 +127,16 @@ throw new CustomException(ErrorCode.SERVER_ERROR, "grade는 6 이상을 입력�
 
 ```java
 public void method() {
-		try {
-			inner();
-		} catch (Exception e) {
-			throw new CustomException(ErrorCode.SERVER_ERROR, "grade는 6 이상을 입력할 수 없습니다.", null);
-		}
+    try {
+        inner();
+    } catch (Exception e) {
+        throw new CustomException(ErrorCode.SERVER_ERROR, "grade는 6 이상을 입력할 수 없습니다.", null);
+    }
 }
 		
 public void inner() {
-		throw new CustomException(
-					ErrorCode.SERVER_ERROR, 
-					"grade는 6 이상을 입력할 수 없습니다.", 
-					new InputRestriction(maxGrade));
+    throw new CustomException(
+        ErrorCode.SERVER_ERROR, "grade는 6 이상을 입력할 수 없습니다.", new InputRestriction(maxGrade));
 }
 ```
 
