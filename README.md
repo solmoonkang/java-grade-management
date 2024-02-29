@@ -19,8 +19,8 @@
 ```java
 @ResponseBody
 public ApiResponse<Student> searchAllStudent() {
-		Student result = studentService.getAll();
-		return makeResponse(result);
+    Student result = studentService.getAll();
+    return makeResponse(result);
 }
 ```
 
@@ -38,8 +38,8 @@ public ApiResponse<Student> searchAllStudent() {
 @ExceptionHandler(CustomException.class)
 @ResponseBody
 public ApiResponse customExceptionHandler(HttpServletResponse response, CustomException e) {
-		response.setStatus(HTTP 응답 값);
-		return new ApiResponse(code, message, data);
+    response.setStatus(HTTP 응답 값);
+    return new ApiResponse(code, message, data);
 }
 ```
 
