@@ -17,10 +17,12 @@ public class Student {
 
     private int year;
 
-    @Builder
-    private Student(String name,
+    @Builder(toBuilder = true)
+    private Student(Long id,
+                    String name,
                     Grade grade,
                     int year) {
+        this.id = id;
         this.name = name;
         this.grade = grade;
         this.year = year;
