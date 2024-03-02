@@ -1,5 +1,6 @@
 package kr.co.gradesmanagement.domain;
 
+import kr.co.gradesmanagement.dto.request.StudentReqDTO;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,5 +27,13 @@ public class Student {
         this.name = name;
         this.grade = grade;
         this.year = year;
+    }
+
+    public static Student create(StudentReqDTO.CREATE create) {
+        return Student.builder()
+                .name(create.getName())
+                .grade(create.getGrade())
+                .year(create.getYear())
+                .build();
     }
 }
