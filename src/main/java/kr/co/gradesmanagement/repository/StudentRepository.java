@@ -14,13 +14,16 @@ public class StudentRepository {
 
     private static final AtomicLong sequence = new AtomicLong();
 
-    public Student save(Student student) {
+    public void save(Student student) {
+        store.put(student.getId(), generateIdIfNull(student));
+    }
+
+    private static Student generateIdIfNull(Student student) {
         if (student.getId() == null) {
             student = student.toBuilder()
                     .id(sequence.incrementAndGet())
                     .build();
         }
-        store.put(student.getId(), student);
         return student;
     }
 }
