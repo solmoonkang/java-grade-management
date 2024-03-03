@@ -14,6 +14,13 @@ public class StudentService {
 
     public void createStudent(StudentReqDTO.CREATE create) {
         final Student student = Student.create(create);
+        validateStudentYear(create.getYear());
         studentRepository.save(student);
+    }
+
+    private void validateStudentYear(int year) {
+        if (year < 0 || year >= 6) {
+            throw new IllegalArgumentException("⚠️[ERROR] " + year + "는 유효하지 않은 학년입니다. 학년은 1~5학년 중에서 입력해주세요.");
+        }
     }
 }
