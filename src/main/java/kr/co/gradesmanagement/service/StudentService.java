@@ -3,11 +3,14 @@ package kr.co.gradesmanagement.service;
 import kr.co.gradesmanagement.domain.Grade;
 import kr.co.gradesmanagement.domain.Student;
 import kr.co.gradesmanagement.dto.request.StudentReqDTO;
+import kr.co.gradesmanagement.dto.response.StudentResDTO;
 import kr.co.gradesmanagement.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +23,12 @@ public class StudentService {
         checkStudentGradeExists(String.valueOf(create.getGrade()));
         checkStudentYearExists(create.getYear());
         studentRepository.save(student);
+    }
+
+    public List<StudentResDTO.READ> findAllStudents() {
+        return studentRepository.findAllStudents().stream()
+                .map(Student::read)
+                .collect(Collectors.toList());
     }
 
     private void checkStudentYearExists(int year) {
