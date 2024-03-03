@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +28,7 @@ public class StudentService {
 
     public List<StudentResDTO.READ> findAllStudents() {
         return studentRepository.findAllStudents().stream()
+                .sorted(Comparator.comparing(Student::getGrade))
                 .map(Student::read)
                 .collect(Collectors.toList());
     }
