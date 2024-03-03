@@ -50,16 +50,19 @@ class StudentServiceTest {
         // Given
         Student student1 = Student.builder().id(1L).name("studentA").grade(Grade.A).year(1).build();
         Student student2 = Student.builder().id(2L).name("studentB").grade(Grade.C).year(3).build();
+        Student student3 = Student.builder().id(3L).name("studentC").grade(Grade.B).year(2).build();
 
         studentRepository.save(student1);
         studentRepository.save(student2);
+        studentRepository.save(student3);
 
         // When
         List<StudentResDTO.READ> studentDTOs = studentService.findAllStudents();
 
         // Then
-        assertEquals(2, studentDTOs.size());
+        assertEquals(3, studentDTOs.size());
         assertEquals(student1.getName(), studentDTOs.get(0).getName());
-        assertEquals(student2.getName(), studentDTOs.get(1).getName());
+        assertEquals(student3.getName(), studentDTOs.get(1).getName());
+        assertEquals(student2.getName(), studentDTOs.get(2).getName());
     }
 }
