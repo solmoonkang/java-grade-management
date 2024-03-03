@@ -14,7 +14,7 @@ public class StudentRepository {
 
     private static final AtomicLong sequence = new AtomicLong(0L);
 
-    public void save(Student student) {
+    public Student save(Student student) {
         Long studentId = sequence.incrementAndGet();
         Student newStudent = Student.builder()
                 .id(studentId)
@@ -24,5 +24,10 @@ public class StudentRepository {
                 .build();
 
         store.put(studentId, newStudent);
+        return newStudent;
+    }
+
+    public void clearStore() {
+        store.clear();
     }
 }
