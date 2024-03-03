@@ -33,6 +33,12 @@ public class StudentService {
                 .collect(Collectors.toList());
     }
 
+    public List<StudentResDTO.READ> findStudentByGrade(Grade grade) {
+        return studentRepository.findStudentByGrade(grade).stream()
+                .map(Student::read)
+                .collect(Collectors.toList());
+    }
+
     private void checkStudentYearExists(int year) {
         if (year < 0 || year >= 6) {
             throw new IllegalArgumentException("⚠️[ERROR] " + year + "는 유효하지 않은 학년입니다. "
