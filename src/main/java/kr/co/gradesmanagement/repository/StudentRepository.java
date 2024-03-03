@@ -12,18 +12,17 @@ public class StudentRepository {
 
     private static final Map<Long, Student> store = new ConcurrentHashMap<>();
 
-    private static final AtomicLong sequence = new AtomicLong();
+    private static final AtomicLong sequence = new AtomicLong(0L);
 
     public void save(Student student) {
-        store.put(student.getId(), generateIdIfNull(student));
-    }
+        Long studentId = sequence.incrementAndGet();
+        Student newStudent = Student.builder()
+                .id(studentId)
+                .name(student.getName())
+                .grade(student.getGrade())
+                .year(student.getYear())
+                .build();
 
-    private static Student generateIdIfNull(Student student) {
-        if (student.getId() == null) {
-            student = student.toBuilder()
-                    .id(sequence.incrementAndGet())
-                    .build();
-        }
-        return student;
+        store.put(studentId, newStudent);
     }
 }
