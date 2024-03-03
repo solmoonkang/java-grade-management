@@ -3,12 +3,17 @@ package kr.co.gradesmanagement.service;
 import kr.co.gradesmanagement.domain.Grade;
 import kr.co.gradesmanagement.domain.Student;
 import kr.co.gradesmanagement.dto.request.StudentReqDTO;
+import kr.co.gradesmanagement.dto.response.StudentResDTO;
 import kr.co.gradesmanagement.repository.StudentRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.when;
 
 class StudentServiceTest {
 
@@ -38,5 +43,23 @@ class StudentServiceTest {
         assertEquals("studentA", findStudent.getName());
         assertEquals(Grade.A, findStudent.getGrade());
         assertEquals(1, findStudent.getYear());
+    }
+
+    @Test
+    void findAllStudents() {
+        // Given
+        Student student1 = Student.builder().id(1L).name("studentA").grade(Grade.A).year(1).build();
+        Student student2 = Student.builder().id(2L).name("studentB").grade(Grade.C).year(3).build();
+
+        studentRepository.save(student1);
+        studentRepository.save(student2);
+
+        // When
+        List<StudentResDTO.READ> studentDTOs = studentService.findAllStudents();
+
+        // Then
+        assertEquals(2, studentDTOs.size());
+        assertEquals(student1.getName(), studentDTOs.get(0).getName());
+        assertEquals(student2.getName(), studentDTOs.get(1).getName());
     }
 }
