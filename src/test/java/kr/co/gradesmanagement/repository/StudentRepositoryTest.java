@@ -69,4 +69,25 @@ class StudentRepositoryTest {
         assertTrue(students.contains(student1));
         assertTrue(students.contains(student2));
     }
+
+    @Test
+    void findStudentByGrade() {
+        // Given
+        Grade testGrade = Grade.A;
+        Student student1 = Student.builder().id(1L).name("studentA").grade(testGrade).year(1).build();
+        Student student2 = Student.builder().id(2L).name("studentB").grade(Grade.B).year(2).build();
+        Student student3 = Student.builder().id(3L).name("studentC").grade(testGrade).year(3).build();
+
+        studentRepository.save(student1);
+        studentRepository.save(student2);
+        studentRepository.save(student3);
+
+        // When
+        List<Student> students = studentRepository.findStudentByGrade(testGrade);
+
+        // Then
+        assertEquals(2, students.size());
+        assertTrue(students.contains(student1));
+        assertTrue(students.contains(student3));
+    }
 }
