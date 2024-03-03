@@ -2,7 +2,6 @@ package kr.co.gradesmanagement.repository;
 
 import kr.co.gradesmanagement.domain.Grade;
 import kr.co.gradesmanagement.domain.Student;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
@@ -32,5 +31,22 @@ class StudentRepositoryTest {
         assertThat("studentA").isEqualTo(savedStudent.getName());
         assertThat(Grade.A).isEqualTo(savedStudent.getGrade());
         assertThat(1).isEqualTo(savedStudent.getYear());
+    }
+
+    @Test
+    void findStudentById() {
+        // Given
+        Student student = Student.builder().name("studentA").grade(Grade.A).year(1).build();
+        Student savedStudent = studentRepository.save(student);
+
+        // When
+        Student findStudent = studentRepository.findStudentById(savedStudent.getId());
+
+        // Then
+        assertNotNull(findStudent);
+        assertEquals(savedStudent.getId(), findStudent.getId());
+        assertEquals("studentA", findStudent.getName());
+        assertEquals(Grade.A, findStudent.getGrade());
+        assertEquals(1, findStudent.getYear());
     }
 }
