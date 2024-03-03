@@ -1,12 +1,11 @@
 package kr.co.gradesmanagement.domain;
 
 import kr.co.gradesmanagement.dto.request.StudentReqDTO;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import kr.co.gradesmanagement.dto.response.StudentResDTO;
+import lombok.*;
 
 @Getter
+@EqualsAndHashCode
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Student {
 
@@ -34,6 +33,14 @@ public class Student {
                 .name(create.getName())
                 .grade(create.getGrade())
                 .year(create.getYear())
+                .build();
+    }
+
+    public StudentResDTO.READ read() {
+        return StudentResDTO.READ.builder()
+                .name(name)
+                .grade(grade)
+                .year(year)
                 .build();
     }
 }
