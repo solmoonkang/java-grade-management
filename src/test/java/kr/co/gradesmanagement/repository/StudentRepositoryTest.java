@@ -2,12 +2,14 @@ package kr.co.gradesmanagement.repository;
 
 import kr.co.gradesmanagement.domain.Grade;
 import kr.co.gradesmanagement.domain.Student;
+import kr.co.gradesmanagement.service.StudentService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 class StudentRepositoryTest {
 
@@ -48,5 +50,23 @@ class StudentRepositoryTest {
         assertEquals("studentA", findStudent.getName());
         assertEquals(Grade.A, findStudent.getGrade());
         assertEquals(1, findStudent.getYear());
+    }
+
+    @Test
+    void findAllStudents() {
+        // Given
+        Student student1 = Student.builder().id(1L).name("studentA").grade(Grade.A).year(1).build();
+        Student student2 = Student.builder().id(2L).name("studentB").grade(Grade.C).year(3).build();
+
+        studentRepository.save(student1);
+        studentRepository.save(student2);
+
+        // When
+        List<Student> students = studentRepository.findAllStudents();
+
+        // Then
+        assertEquals(2, students.size());
+        assertTrue(students.contains(student1));
+        assertTrue(students.contains(student2));
     }
 }
