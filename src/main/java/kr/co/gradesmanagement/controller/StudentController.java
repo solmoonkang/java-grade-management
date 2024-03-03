@@ -1,5 +1,6 @@
 package kr.co.gradesmanagement.controller;
 
+import kr.co.gradesmanagement.domain.Grade;
 import kr.co.gradesmanagement.dto.request.StudentReqDTO;
 import kr.co.gradesmanagement.dto.response.StudentResDTO;
 import kr.co.gradesmanagement.service.StudentService;
@@ -26,5 +27,10 @@ public class StudentController {
     @GetMapping
     public ResponseEntity<List<StudentResDTO.READ>> findAllStudents() {
         return ResponseEntity.ok(studentService.findAllStudents());
+    }
+
+    @GetMapping("/grade")
+    public ResponseEntity<List<StudentResDTO.READ>> findStudentByGrade(@RequestParam Grade grade) {
+        return ResponseEntity.ok(studentService.findStudentByGrade(grade));
     }
 }
