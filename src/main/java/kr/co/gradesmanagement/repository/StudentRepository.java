@@ -33,7 +33,7 @@ public class StudentRepository {
         return store.get(studentId);
     }
 
-    public List<Student> findAllStudent() {
+    public List<Student> findAllStudents() {
         return new ArrayList<>(store.values());
     }
 
