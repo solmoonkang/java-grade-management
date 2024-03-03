@@ -18,11 +18,11 @@ public class Student {
 
     private int year;
 
-    @Builder(toBuilder = true)
+    @Builder
     private Student(Long id,
-                    String name,
-                    Grade grade,
-                    int year) {
+                   String name,
+                   Grade grade,
+                   int year) {
         this.id = id;
         this.name = name;
         this.grade = grade;
