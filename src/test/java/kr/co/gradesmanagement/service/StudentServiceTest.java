@@ -65,4 +65,23 @@ class StudentServiceTest {
         assertEquals(student3.getName(), studentDTOs.get(1).getName());
         assertEquals(student2.getName(), studentDTOs.get(2).getName());
     }
+
+    @Test
+    void findStudentByGrade() {
+        // Given
+        Grade testGrade = Grade.A;
+        Student student1 = Student.builder().id(1L).name("studentA").grade(testGrade).year(1).build();
+        Student student2 = Student.builder().id(2L).name("studentB").grade(testGrade).year(2).build();
+
+        studentRepository.save(student1);
+        studentRepository.save(student2);
+
+        // When
+        List<StudentResDTO.READ> studentDTOs = studentService.findStudentByGrade(testGrade);
+
+        // Then
+        assertEquals(2, studentDTOs.size());
+        assertEquals(student1.getGrade(), studentDTOs.get(0).getGrade());
+        assertEquals(student2.getGrade(), studentDTOs.get(1).getGrade());
+    }
 }
