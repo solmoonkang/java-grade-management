@@ -1,5 +1,6 @@
 package kr.co.gradesmanagement.repository;
 
+import kr.co.gradesmanagement.domain.Grade;
 import kr.co.gradesmanagement.domain.Student;
 import org.springframework.stereotype.Repository;
 
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.Collectors;
 
 @Repository
 public class StudentRepository {
@@ -35,6 +37,12 @@ public class StudentRepository {
 
     public List<Student> findAllStudents() {
         return new ArrayList<>(store.values());
+    }
+
+    public List<Student> findStudentByGrade(Grade grade) {
+        return store.values().stream()
+                .filter(student -> student.getGrade() == grade)
+                .collect(Collectors.toList());
     }
 
     public void clearStore() {
