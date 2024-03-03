@@ -3,6 +3,8 @@ package kr.co.gradesmanagement.repository;
 import kr.co.gradesmanagement.domain.Student;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
@@ -29,6 +31,10 @@ public class StudentRepository {
 
     public Student findStudentById(Long studentId) {
         return store.get(studentId);
+    }
+
+    public List<Student> findAllStudent() {
+        return new ArrayList<>(store.values());
     }
 
     public void clearStore() {
