@@ -27,6 +27,10 @@ public class StudentRepository {
         return newStudent;
     }
 
+    public Student findStudentById(Long studentId) {
+        return store.get(studentId);
+    }
+
     public void clearStore() {
         store.clear();
     }
