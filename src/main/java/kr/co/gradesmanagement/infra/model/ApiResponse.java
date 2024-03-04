@@ -16,7 +16,7 @@ public class ApiResponse<T> {
 
     private String message;
 
-    private Optional<T> data;
+    private T data;
 
     private boolean isSuccessful;
 
@@ -24,7 +24,7 @@ public class ApiResponse<T> {
         return ApiResponse.<T>builder()
                 .status(errorCode.getStatus())
                 .message(errorCode.getMessage())
-                .data(Optional.empty())
+                .data(null)
                 .isSuccessful(true)
                 .build();
     }
@@ -33,7 +33,7 @@ public class ApiResponse<T> {
         return ApiResponse.<T>builder()
                 .status(errorCode.getStatus())
                 .message(errorCode.getMessage())
-                .data(Optional.ofNullable(data))
+                .data(data)
                 .isSuccessful(false)
                 .build();
     }
