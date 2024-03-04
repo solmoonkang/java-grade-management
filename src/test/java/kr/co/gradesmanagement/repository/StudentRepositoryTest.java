@@ -1,8 +1,7 @@
 package kr.co.gradesmanagement.repository;
 
-import kr.co.gradesmanagement.domain.Grade;
-import kr.co.gradesmanagement.domain.Student;
-import kr.co.gradesmanagement.service.StudentService;
+import kr.co.gradesmanagement.model.domain.Grade;
+import kr.co.gradesmanagement.model.domain.Student;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
