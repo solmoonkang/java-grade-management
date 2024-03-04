@@ -25,7 +25,7 @@ public class StudentService {
     private final StudentRepository studentRepository;
 
     public void createStudent(StudentReqDTO.CREATE create) {
-        final Student student = Student.create(create);
+        final Student student = Student.toStudentEntity(create);
         checkStudentGradeExists(String.valueOf(create.getGrade()));
         checkStudentYearExists(create.getYear());
         studentRepository.save(student);
@@ -34,13 +34,13 @@ public class StudentService {
     public List<StudentResDTO.READ> findAllStudents() {
         return studentRepository.findAllStudents().stream()
                 .sorted(Comparator.comparing(Student::getGrade))
-                .map(Student::read)
+                .map(Student::toReadDto)
                 .collect(Collectors.toList());
     }
 
     public List<StudentResDTO.READ> findStudentByGrade(Grade grade) {
         return studentRepository.findStudentByGrade(grade).stream()
-                .map(Student::read)
+                .map(Student::toReadDto)
                 .collect(Collectors.toList());
     }
 
