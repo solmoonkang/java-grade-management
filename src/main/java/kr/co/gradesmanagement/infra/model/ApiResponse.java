@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
-import java.util.Optional;
-
 @Getter
 @AllArgsConstructor
 @Builder
@@ -25,6 +23,15 @@ public class ApiResponse<T> {
                 .status(errorCode.getStatus())
                 .message(errorCode.getMessage())
                 .data(null)
+                .isSuccessful(true)
+                .build();
+    }
+
+    public static <T> ApiResponse<T> successMessageWithData(ErrorCode errorCode, T data) {
+        return ApiResponse.<T>builder()
+                .status(errorCode.getStatus())
+                .message(errorCode.getMessage())
+                .data(data)
                 .isSuccessful(true)
                 .build();
     }
