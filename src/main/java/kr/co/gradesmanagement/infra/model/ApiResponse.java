@@ -49,8 +49,8 @@ public class ApiResponse<T> {
                 .build();
     }
 
-    public static <T> ApiResponse<T> failureMessage(ErrorCode errorCode, String message) {
-        return ApiResponse.<T>builder()
+    public static ApiResponse failureMessage(ErrorCode errorCode, String message) {
+        return ApiResponse.builder()
                 .status(new Status(errorCode.getStatus().value(), message))
                 .build();
     }
