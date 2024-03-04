@@ -1,5 +1,7 @@
 package kr.co.gradesmanagement.controller;
 
+import kr.co.gradesmanagement.infra.model.ApiResponse;
+import kr.co.gradesmanagement.infra.model.ErrorCode;
 import kr.co.gradesmanagement.model.domain.Grade;
 import kr.co.gradesmanagement.model.dto.request.StudentReqDTO;
 import kr.co.gradesmanagement.model.dto.response.StudentResDTO;
@@ -19,18 +21,22 @@ public class StudentController {
     private final StudentService studentService;
 
     @PostMapping
-    public ResponseEntity<String> createStudent(@RequestBody StudentReqDTO.CREATE create) {
+    public ApiResponse<Void> createStudent(@RequestBody StudentReqDTO.CREATE create) {
         studentService.createStudent(create);
-        return ResponseEntity.status(HttpStatus.CREATED).body("OK");
+        return ApiResponse.successMessage(ErrorCode.SUCCESS_CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<List<StudentResDTO.READ>> findAllStudents() {
-        return ResponseEntity.ok(studentService.findAllStudents());
+    public ApiResponse<List<StudentResDTO.READ>> findAllStudents() {
+        return ApiResponse.successMessageWithData(
+                ErrorCode.SUCCESS_EXECUTE,
+                studentService.findAllStudents());
     }
 
     @GetMapping("/grade")
-    public ResponseEntity<List<StudentResDTO.READ>> findStudentByGrade(@RequestParam Grade grade) {
-        return ResponseEntity.ok(studentService.findStudentByGrade(grade));
+    public ApiResponse<List<StudentResDTO.READ>> findStudentByGrade(@RequestParam Grade grade) {
+        return ApiResponse.successMessageWithData(
+                ErrorCode.SUCCESS_EXECUTE,
+                studentService.findStudentByGrade(grade));
     }
 }
