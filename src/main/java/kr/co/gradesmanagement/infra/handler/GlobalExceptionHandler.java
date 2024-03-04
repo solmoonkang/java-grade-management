@@ -18,24 +18,21 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NotFoundException.class)
     protected ResponseEntity<ApiResponse> handleNotFoundException(NotFoundException e) {
         log.warn("====== HandleNotFoundException =====", e);
-        ApiResponse apiResponse = ApiResponse.failureMessage(
-                new ApiResponse.Status(ErrorCode.FAIL_NOT_FOUND.getStatus().value(), e.getMessage()));
+        ApiResponse apiResponse = ApiResponse.failureMessage(ErrorCode.FAIL_NOT_FOUND, e.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiResponse);
     }
 
     @ExceptionHandler(InvalidRequestException.class)
     protected ResponseEntity<ApiResponse> handleInvalidRequestException(InvalidRequestException e) {
         log.warn("====== HandleInvalidRequestException =====", e);
-        ApiResponse apiResponse = ApiResponse.failureMessage(
-                new ApiResponse.Status(ErrorCode.FAIL_BAD_REQUEST.getStatus().value(), e.getMessage()));
+        ApiResponse apiResponse = ApiResponse.failureMessage(ErrorCode.FAIL_BAD_REQUEST, e.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiResponse);
     }
 
     @ExceptionHandler(CustomException.class)
     protected ResponseEntity<ApiResponse> handleCustomException(CustomException e) {
         log.warn("====== HandleCustomException =====", e);
-        ApiResponse apiResponse = ApiResponse.failureMessage(
-                new ApiResponse.Status(ErrorCode.FAIL_SERVER_ERROR.getStatus().value(), e.getMessage()));
+        ApiResponse apiResponse = ApiResponse.failureMessage(ErrorCode.FAIL_SERVER_ERROR, e.getMessage());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(apiResponse);
     }
 }
