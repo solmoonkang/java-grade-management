@@ -13,13 +13,13 @@ public class StudentReqDTO {
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class CREATE {
 
-        @NotBlank(message = "학생 이름을 입력해주세요.")
+        @NotBlank(message = "학생 이름은 비어 있을 수 없습니다.")
         private String name;
 
-        @NotBlank(message = "학생 성적을 입력해주세요.")
+        @NotBlank(message = "학생 성적은 비어 있을 수 없습니다.")
         private Grade grade;
 
-        @NotNull(message = "학생 학년을 입력해주세요.")
+        @NotNull(message = "학생 학년은 비어 있을 수 없습니다.")
         private int year;
     }
 }
