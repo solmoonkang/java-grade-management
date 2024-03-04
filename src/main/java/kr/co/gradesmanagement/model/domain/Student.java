@@ -40,7 +40,6 @@ public class Student {
         return StudentResDTO.READ.builder()
                 .name(name)
                 .grade(grade)
-                .year(year)
                 .build();
     }
 }
