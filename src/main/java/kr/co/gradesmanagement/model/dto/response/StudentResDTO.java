@@ -14,7 +14,5 @@ public class StudentResDTO {
         private String name;
 
         private Grade grade;
-
-        private int year;
     }
 }
