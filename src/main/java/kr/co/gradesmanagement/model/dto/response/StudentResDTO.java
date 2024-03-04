@@ -1,20 +1,18 @@
-package kr.co.gradesmanagement.dto.request;
+package kr.co.gradesmanagement.model.dto.response;
 
-import kr.co.gradesmanagement.domain.Grade;
+import kr.co.gradesmanagement.model.domain.Grade;
 import lombok.*;
 
-public class StudentReqDTO {
+public class StudentResDTO {
 
     @Getter
     @Builder
     @AllArgsConstructor(access = AccessLevel.PRIVATE)
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
-    public static class CREATE {
+    public static class READ {
 
         private String name;
 
         private Grade grade;
-
-        private int year;
     }
 }

@@ -1,19 +1,17 @@
 package kr.co.gradesmanagement.service;
 
-import kr.co.gradesmanagement.domain.Grade;
-import kr.co.gradesmanagement.domain.Student;
-import kr.co.gradesmanagement.dto.request.StudentReqDTO;
-import kr.co.gradesmanagement.dto.response.StudentResDTO;
+import kr.co.gradesmanagement.model.domain.Grade;
+import kr.co.gradesmanagement.model.domain.Student;
+import kr.co.gradesmanagement.model.dto.request.StudentReqDTO;
+import kr.co.gradesmanagement.model.dto.response.StudentResDTO;
 import kr.co.gradesmanagement.repository.StudentRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.when;
 
 class StudentServiceTest {
 

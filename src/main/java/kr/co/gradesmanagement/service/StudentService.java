@@ -1,9 +1,11 @@
 package kr.co.gradesmanagement.service;
 
-import kr.co.gradesmanagement.domain.Grade;
-import kr.co.gradesmanagement.domain.Student;
-import kr.co.gradesmanagement.dto.request.StudentReqDTO;
-import kr.co.gradesmanagement.dto.response.StudentResDTO;
+import kr.co.gradesmanagement.infra.exception.InvalidRequestException;
+import kr.co.gradesmanagement.infra.model.ErrorCode;
+import kr.co.gradesmanagement.model.domain.Grade;
+import kr.co.gradesmanagement.model.domain.Student;
+import kr.co.gradesmanagement.model.dto.request.StudentReqDTO;
+import kr.co.gradesmanagement.model.dto.response.StudentResDTO;
 import kr.co.gradesmanagement.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,10 +19,13 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class StudentService {
 
+    private static final int MIN_GRADE = 0;
+    private static final int MAX_GRADE = 6;
+
     private final StudentRepository studentRepository;
 
     public void createStudent(StudentReqDTO.CREATE create) {
-        final Student student = Student.create(create);
+        final Student student = Student.toStudentEntity(create);
         checkStudentGradeExists(String.valueOf(create.getGrade()));
         checkStudentYearExists(create.getYear());
         studentRepository.save(student);
@@ -29,20 +34,19 @@ public class StudentService {
     public List<StudentResDTO.READ> findAllStudents() {
         return studentRepository.findAllStudents().stream()
                 .sorted(Comparator.comparing(Student::getGrade))
-                .map(Student::read)
+                .map(Student::toReadDto)
                 .collect(Collectors.toList());
     }
 
     public List<StudentResDTO.READ> findStudentByGrade(Grade grade) {
         return studentRepository.findStudentByGrade(grade).stream()
-                .map(Student::read)
+                .map(Student::toReadDto)
                 .collect(Collectors.toList());
     }
 
     private void checkStudentYearExists(int year) {
-        if (year < 0 || year >= 6) {
-            throw new IllegalArgumentException("⚠️[ERROR] " + year + "는 유효하지 않은 학년입니다. "
-                    + "학년은 1~5학년 중에서 입력해주세요.");
+        if (year < MIN_GRADE || year >= MAX_GRADE) {
+            throw new InvalidRequestException(ErrorCode.FAIL_INVALID_YEAR);
         }
     }
 
@@ -51,8 +55,7 @@ public class StudentService {
                 .anyMatch(validGrade -> validGrade.name().equals(grade));
 
         if (!isMatchGrade) {
-            throw new IllegalArgumentException("⚠️[ERROR] " + grade + "는 유효하지 않은 학점입니다. "
-                    + "학점은 A, B, C, D, F 중에서 입력해주세요.");
+            throw new InvalidRequestException(ErrorCode.FAIL_INVALID_GRADE);
         }
     }
 }

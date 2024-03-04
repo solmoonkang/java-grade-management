@@ -1,7 +1,7 @@
-package kr.co.gradesmanagement.domain;
+package kr.co.gradesmanagement.model.domain;
 
-import kr.co.gradesmanagement.dto.request.StudentReqDTO;
-import kr.co.gradesmanagement.dto.response.StudentResDTO;
+import kr.co.gradesmanagement.model.dto.request.StudentReqDTO;
+import kr.co.gradesmanagement.model.dto.response.StudentResDTO;
 import lombok.*;
 
 @Getter
@@ -19,16 +19,16 @@ public class Student {
 
     @Builder
     private Student(Long id,
-                   String name,
-                   Grade grade,
-                   int year) {
+                    String name,
+                    Grade grade,
+                    int year) {
         this.id = id;
         this.name = name;
         this.grade = grade;
         this.year = year;
     }
 
-    public static Student create(StudentReqDTO.CREATE create) {
+    public static Student toStudentEntity(StudentReqDTO.CREATE create) {
         return Student.builder()
                 .name(create.getName())
                 .grade(create.getGrade())
@@ -36,11 +36,10 @@ public class Student {
                 .build();
     }
 
-    public StudentResDTO.READ read() {
+    public StudentResDTO.READ toReadDto() {
         return StudentResDTO.READ.builder()
                 .name(name)
                 .grade(grade)
-                .year(year)
                 .build();
     }
 }
