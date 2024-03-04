@@ -20,6 +20,7 @@ public class StudentRepository {
 
     public Student save(Student student) {
         Long studentId = sequence.incrementAndGet();
+
         Student newStudent = Student.builder()
                 .id(studentId)
                 .name(student.getName())
@@ -28,6 +29,7 @@ public class StudentRepository {
                 .build();
 
         store.put(studentId, newStudent);
+
         return newStudent;
     }
 
