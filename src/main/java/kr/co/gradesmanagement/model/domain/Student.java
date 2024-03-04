@@ -28,7 +28,7 @@ public class Student {
         this.year = year;
     }
 
-    public static Student create(StudentReqDTO.CREATE create) {
+    public static Student toStudentEntity(StudentReqDTO.CREATE create) {
         return Student.builder()
                 .name(create.getName())
                 .grade(create.getGrade())
@@ -36,7 +36,7 @@ public class Student {
                 .build();
     }
 
-    public StudentResDTO.READ read() {
+    public StudentResDTO.READ toReadDto() {
         return StudentResDTO.READ.builder()
                 .name(name)
                 .grade(grade)
