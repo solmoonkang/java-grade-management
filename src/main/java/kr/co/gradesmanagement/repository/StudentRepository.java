@@ -1,7 +1,7 @@
 package kr.co.gradesmanagement.repository;
 
-import kr.co.gradesmanagement.domain.Grade;
-import kr.co.gradesmanagement.domain.Student;
+import kr.co.gradesmanagement.model.domain.Grade;
+import kr.co.gradesmanagement.model.domain.Student;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

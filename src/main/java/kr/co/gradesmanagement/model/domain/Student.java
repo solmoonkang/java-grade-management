@@ -1,7 +1,7 @@
-package kr.co.gradesmanagement.domain;
+package kr.co.gradesmanagement.model.domain;
 
-import kr.co.gradesmanagement.dto.request.StudentReqDTO;
-import kr.co.gradesmanagement.dto.response.StudentResDTO;
+import kr.co.gradesmanagement.model.dto.request.StudentReqDTO;
+import kr.co.gradesmanagement.model.dto.response.StudentResDTO;
 import lombok.*;
 
 @Getter

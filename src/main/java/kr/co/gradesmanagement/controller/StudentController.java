@@ -1,8 +1,8 @@
 package kr.co.gradesmanagement.controller;
 
-import kr.co.gradesmanagement.domain.Grade;
-import kr.co.gradesmanagement.dto.request.StudentReqDTO;
-import kr.co.gradesmanagement.dto.response.StudentResDTO;
+import kr.co.gradesmanagement.model.domain.Grade;
+import kr.co.gradesmanagement.model.dto.request.StudentReqDTO;
+import kr.co.gradesmanagement.model.dto.response.StudentResDTO;
 import kr.co.gradesmanagement.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

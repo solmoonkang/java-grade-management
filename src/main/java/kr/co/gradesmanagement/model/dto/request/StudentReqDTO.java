@@ -1,6 +1,6 @@
-package kr.co.gradesmanagement.dto.request;
+package kr.co.gradesmanagement.model.dto.request;
 
-import kr.co.gradesmanagement.domain.Grade;
+import kr.co.gradesmanagement.model.domain.Grade;
 import lombok.*;
 
 public class StudentReqDTO {
