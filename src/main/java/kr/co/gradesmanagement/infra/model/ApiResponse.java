@@ -4,48 +4,61 @@ import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import org.springframework.http.HttpStatus;
+
+import java.util.List;
 
 @Getter
-@AllArgsConstructor
 @Builder
+@AllArgsConstructor
 public class ApiResponse<T> {
 
-    private HttpStatus status;
+    private Status status;
 
-    private String message;
+    private Metadata metadata;
 
     @Nullable
-    private T data;
+    private T result;
+
+    @Getter
+    @AllArgsConstructor
+    public static class Status {
+
+        private int httpStatus;
+
+        private String message;
+    }
+
+    @Getter
+    @AllArgsConstructor
+    public static class Metadata {
+
+        private int resultCount;
+    }
 
     public static <T> ApiResponse<T> successMessage(ErrorCode errorCode) {
         return ApiResponse.<T>builder()
-                .status(errorCode.getStatus())
-                .message(errorCode.getMessage())
-                .data(null)
+                .status(new Status(errorCode.getStatus().value(), errorCode.getMessage()))
                 .build();
     }
 
-    public static <T> ApiResponse<T> successMessageWithData(ErrorCode errorCode, T data) {
+    public static <T> ApiResponse<T> successMessageWithData(ErrorCode errorCode, T result) {
         return ApiResponse.<T>builder()
-                .status(errorCode.getStatus())
-                .message(errorCode.getMessage())
-                .data(data)
+                .status(new Status(errorCode.getStatus().value(), errorCode.getMessage()))
+                .metadata(new Metadata(((List<?>) result).size()))
+                .result(result)
                 .build();
     }
 
-    public static <T> ApiResponse<T> failureMessage(ErrorCode errorCode, T data) {
+    public static <T> ApiResponse<T> failureMessage(ErrorCode errorCode, T result) {
         return ApiResponse.<T>builder()
-                .status(errorCode.getStatus())
-                .message(errorCode.getMessage())
-                .data(data)
+                .status(new Status(errorCode.getStatus().value(), errorCode.getMessage()))
+                .result(result)
                 .build();
     }
 
-    public static ApiResponse failureMessage(HttpStatus status, String message) {
+    public static ApiResponse failureMessage(Status status) {
         return ApiResponse.builder()
                 .status(status)
-                .message(message)
                 .build();
     }
 }
