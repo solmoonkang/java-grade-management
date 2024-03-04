@@ -28,4 +28,13 @@ public class ApiResponse<T> {
                 .isSuccessful(true)
                 .build();
     }
+
+    public static <T> ApiResponse<T> failureMessage(ErrorCode errorCode, T data) {
+        return ApiResponse.<T>builder()
+                .status(errorCode.getStatus())
+                .message(errorCode.getMessage())
+                .data(Optional.ofNullable(data))
+                .isSuccessful(false)
+                .build();
+    }
 }
