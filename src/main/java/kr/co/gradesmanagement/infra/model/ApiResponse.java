@@ -41,4 +41,11 @@ public class ApiResponse<T> {
                 .data(data)
                 .build();
     }
+
+    public static ApiResponse failureMessage(HttpStatus status, String message) {
+        return ApiResponse.builder()
+                .status(status)
+                .message(message)
+                .build();
+    }
 }
