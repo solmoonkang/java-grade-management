@@ -1,5 +1,6 @@
 package kr.co.gradesmanagement.infra.model;
 
+import jakarta.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,16 +15,14 @@ public class ApiResponse<T> {
 
     private String message;
 
+    @Nullable
     private T data;
-
-    private boolean isSuccessful;
 
     public static <T> ApiResponse<T> successMessage(ErrorCode errorCode) {
         return ApiResponse.<T>builder()
                 .status(errorCode.getStatus())
                 .message(errorCode.getMessage())
                 .data(null)
-                .isSuccessful(true)
                 .build();
     }
 
@@ -32,7 +31,6 @@ public class ApiResponse<T> {
                 .status(errorCode.getStatus())
                 .message(errorCode.getMessage())
                 .data(data)
-                .isSuccessful(true)
                 .build();
     }
 
@@ -41,7 +39,6 @@ public class ApiResponse<T> {
                 .status(errorCode.getStatus())
                 .message(errorCode.getMessage())
                 .data(data)
-                .isSuccessful(false)
                 .build();
     }
 }
