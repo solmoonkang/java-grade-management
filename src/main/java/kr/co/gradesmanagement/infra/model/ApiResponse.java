@@ -49,16 +49,9 @@ public class ApiResponse<T> {
                 .build();
     }
 
-    public static <T> ApiResponse<T> failureMessage(ErrorCode errorCode, T result) {
+    public static <T> ApiResponse<T> failureMessage(ErrorCode errorCode, String message) {
         return ApiResponse.<T>builder()
-                .status(new Status(errorCode.getStatus().value(), errorCode.getMessage()))
-                .result(result)
-                .build();
-    }
-
-    public static ApiResponse failureMessage(Status status) {
-        return ApiResponse.builder()
-                .status(status)
+                .status(new Status(errorCode.getStatus().value(), message))
                 .build();
     }
 }
