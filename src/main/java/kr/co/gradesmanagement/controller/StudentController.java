@@ -9,6 +9,7 @@ import kr.co.gradesmanagement.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,22 +22,18 @@ public class StudentController {
     private final StudentService studentService;
 
     @PostMapping
-    public ApiResponse<Void> createStudent(@RequestBody StudentReqDTO.CREATE create) {
+    public ApiResponse<Void> createStudent(@RequestBody @Validated StudentReqDTO.CREATE create) {
         studentService.createStudent(create);
         return ApiResponse.successMessage(ErrorCode.SUCCESS_CREATED);
     }
 
     @GetMapping
     public ApiResponse<List<StudentResDTO.READ>> findAllStudents() {
-        return ApiResponse.successMessageWithData(
-                ErrorCode.SUCCESS_EXECUTE,
-                studentService.findAllStudents());
+        return ApiResponse.successMessageWithData(ErrorCode.SUCCESS_EXECUTE, studentService.findAllStudents());
     }
 
     @GetMapping("/grade")
     public ApiResponse<List<StudentResDTO.READ>> findStudentByGrade(@RequestParam Grade grade) {
-        return ApiResponse.successMessageWithData(
-                ErrorCode.SUCCESS_EXECUTE,
-                studentService.findStudentByGrade(grade));
+        return ApiResponse.successMessageWithData(ErrorCode.SUCCESS_EXECUTE, studentService.findStudentByGrade(grade));
     }
 }
