@@ -1,4 +1,4 @@
-package kr.co.gradesmanagement.infra.model;
+package kr.co.gradesmanagement.infra.exception.error;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

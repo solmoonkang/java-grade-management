@@ -1,6 +1,7 @@
-package kr.co.gradesmanagement.infra.model;
+package kr.co.gradesmanagement.infra.response;
 
-import jakarta.annotation.Nullable;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import kr.co.gradesmanagement.infra.exception.error.ErrorCode;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,28 +13,14 @@ import java.util.List;
 @AllArgsConstructor
 public class ApiResponse<T> {
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Status status;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Metadata metadata;
 
-    @Nullable
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private T result;
-
-    @Getter
-    @AllArgsConstructor
-    public static class Status {
-
-        private int httpStatus;
-
-        private String message;
-    }
-
-    @Getter
-    @AllArgsConstructor
-    public static class Metadata {
-
-        private int resultCount;
-    }
 
     public static <T> ApiResponse<T> successMessage(ErrorCode errorCode) {
         return ApiResponse.<T>builder()

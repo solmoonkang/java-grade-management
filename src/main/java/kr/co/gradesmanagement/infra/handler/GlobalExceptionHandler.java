@@ -2,8 +2,8 @@ package kr.co.gradesmanagement.infra.handler;
 
 import kr.co.gradesmanagement.infra.exception.CustomException;
 import kr.co.gradesmanagement.infra.exception.InvalidRequestException;
-import kr.co.gradesmanagement.infra.model.ApiResponse;
-import kr.co.gradesmanagement.infra.model.ErrorCode;
+import kr.co.gradesmanagement.infra.response.ApiResponse;
+import kr.co.gradesmanagement.infra.exception.error.ErrorCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
