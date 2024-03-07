@@ -1,6 +1,7 @@
-package kr.co.gradesmanagement.infra.model;
+package kr.co.gradesmanagement.infra.response;
 
 import jakarta.annotation.Nullable;
+import kr.co.gradesmanagement.infra.exception.error.ErrorCode;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

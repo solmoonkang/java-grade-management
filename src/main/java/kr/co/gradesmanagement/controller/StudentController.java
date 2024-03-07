@@ -1,7 +1,7 @@
 package kr.co.gradesmanagement.controller;
 
-import kr.co.gradesmanagement.infra.model.ApiResponse;
-import kr.co.gradesmanagement.infra.model.ErrorCode;
+import kr.co.gradesmanagement.infra.response.ApiResponse;
+import kr.co.gradesmanagement.infra.exception.error.ErrorCode;
 import kr.co.gradesmanagement.model.domain.Grade;
 import kr.co.gradesmanagement.model.dto.request.StudentReqDTO;
 import kr.co.gradesmanagement.model.dto.response.StudentResDTO;

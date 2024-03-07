@@ -1,7 +1,7 @@
 package kr.co.gradesmanagement.service;
 
 import kr.co.gradesmanagement.infra.exception.InvalidRequestException;
-import kr.co.gradesmanagement.infra.model.ErrorCode;
+import kr.co.gradesmanagement.infra.exception.error.ErrorCode;
 import kr.co.gradesmanagement.model.domain.Grade;
 import kr.co.gradesmanagement.model.domain.Student;
 import kr.co.gradesmanagement.model.dto.request.StudentReqDTO;

@@ -1,6 +1,6 @@
 package kr.co.gradesmanagement.infra.exception;
 
-import kr.co.gradesmanagement.infra.model.ErrorCode;
+import kr.co.gradesmanagement.infra.exception.error.ErrorCode;
 
 public class CustomException extends RuntimeException {
 
